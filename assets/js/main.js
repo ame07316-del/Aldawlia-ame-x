@@ -243,6 +243,16 @@
       });
     }
 
+    function announceLayout() {
+      try {
+        document.dispatchEvent(new CustomEvent("amk:layout"));
+      } catch (err) {
+        var evt = document.createEvent("CustomEvent");
+        evt.initCustomEvent("amk:layout", true, true, null);
+        document.dispatchEvent(evt);
+      }
+    }
+
     /* ---------------------------------------------------
        9. Work filters
     --------------------------------------------------- */
@@ -270,6 +280,9 @@
               }, 260);
             }
           });
+
+          /* The grid just changed height — the scroll engine needs new geometry. */
+          announceLayout();
         });
       });
     }
@@ -291,6 +304,7 @@
             item.classList.add("is-open");
             head.setAttribute("aria-expanded", "true");
           }
+          window.setTimeout(announceLayout, 480);
         });
       });
     });

@@ -127,7 +127,7 @@
       <span>35.9° E</span><span class="dot"></span><span>29.3° N</span>
     </div>
     <div class="hero-meta hero-meta--end" aria-hidden="true">
-      <span>SCHWARZSCHILD</span><span class="dot"></span><span>r₊ 1.0</span><span class="dot"></span><span>ISCO 3.0</span>
+      <span>SCHWARZSCHILD</span><span class="dot"></span><span>r₊ 1.0</span><span class="dot"></span><span>ISCO 3.0</span><span class="dot"></span><span id="scrollPct">000%</span>
     </div>
 
     <div class="container hero-inner">
@@ -201,7 +201,7 @@
     <div class="container">
       <header class="sec-head">
         <span class="sec-index">/01</span>
-        <h2 class="sec-title">مش وكالة تانية.<br />إحنا <span class="mark">مسرّع</span> للبراندات اللي عندها جرأة.</h2>
+        <h2 class="sec-title" data-words>مش وكالة تانية.<br />إحنا <span class="mark">مسرّع</span> للبراندات اللي عندها جرأة.</h2>
         <p class="sec-lead">
           السوق مليان تصميمات حلوة ومفيش حد فاكرها. إحنا بنشتغل على العكس: فكرة واحدة قوية، تنفيذ نضيف،
           وصوت عالي. بنبدأ من سؤال واحد — <strong>ليه حد يهتم؟</strong> — وبنبني كل حاجة حواليه.
@@ -226,7 +226,7 @@
         </article>
       </div>
 
-      <blockquote class="manifesto-quote" data-reveal>
+      <blockquote class="manifesto-quote" data-reveal data-sweep>
         <p>«إحنا مش بنبيع تصاميم. إحنا بنبيع <span class="hl">لحظة ما حد يشوفك يقول: مين دول؟</span>»</p>
         <footer>
           <span class="avatar">ع</span>
@@ -241,7 +241,7 @@
     <div class="container">
       <header class="sec-head">
         <span class="sec-index">/02</span>
-        <h2 class="sec-title">شغل اتكلم<br />بدل ما يتكلموا عنه.</h2>
+        <h2 class="sec-title" data-words>شغل اتكلم<br />بدل ما يتكلموا عنه.</h2>
         <div class="work-head-right">
           <p class="sec-lead">أربع حكايات من أصل 120. كل واحدة بدأت بفكرة مجنونة… وخلصت برقم.</p>
           <div class="filters" id="filters" role="group" aria-label="تصفية الأعمال">
@@ -257,8 +257,10 @@
       <div class="work-grid" id="workGrid">
         <article class="work-card work-card--wide" data-cat="brand" data-reveal>
           <a href="#contact" class="work-link" aria-label="بن القاهرة — هوية بصرية">
-            <div class="work-media">
-              <img src="assets/img/work-coffee.jpg" alt="بن القاهرة — هوية وتغليف" loading="lazy" width="900" height="1350" />
+            <div class="work-media" data-mask>
+              <div class="media-inner" data-parallax="0.14">
+                <img src="assets/img/work-coffee.jpg" alt="بن القاهرة — هوية وتغليف" loading="lazy" width="900" height="1350" />
+              </div>
             </div>
             <div class="work-info">
               <div class="work-top"><span class="tag">هوية + تغليف</span><span class="year">2025</span></div>
@@ -277,8 +279,10 @@
 
         <article class="work-card" data-cat="digital" data-reveal data-delay="70">
           <a href="#contact" class="work-link" aria-label="Pulse — تطبيق صحي">
-            <div class="work-media">
-              <img src="assets/img/work-pulse.jpg" alt="Pulse — تطبيق صحي" loading="lazy" width="900" height="600" />
+            <div class="work-media" data-mask>
+              <div class="media-inner" data-parallax="0.14">
+                <img src="assets/img/work-pulse.jpg" alt="Pulse — تطبيق صحي" loading="lazy" width="900" height="600" />
+              </div>
             </div>
             <div class="work-info">
               <div class="work-top"><span class="tag">منتج رقمي</span><span class="year">2025</span></div>
@@ -294,8 +298,10 @@
 
         <article class="work-card" data-cat="campaign" data-reveal data-delay="110">
           <a href="#contact" class="work-link" aria-label="ساحل — حملة إطلاق">
-            <div class="work-media">
-              <img src="assets/img/work-coast.jpg" alt="ساحل — حملة منتجع" loading="lazy" width="900" height="600" />
+            <div class="work-media" data-mask>
+              <div class="media-inner" data-parallax="0.14">
+                <img src="assets/img/work-coast.jpg" alt="ساحل — حملة منتجع" loading="lazy" width="900" height="600" />
+              </div>
             </div>
             <div class="work-info">
               <div class="work-top"><span class="tag">حملة إطلاق</span><span class="year">2024</span></div>
@@ -311,8 +317,10 @@
 
         <article class="work-card work-card--wide" data-cat="ecom" data-reveal data-delay="150">
           <a href="#contact" class="work-link" aria-label="ZERO — متجر إلكتروني">
-            <div class="work-media">
-              <img src="assets/img/work-zero.jpg" alt="ZERO — متجر أحذية" loading="lazy" width="900" height="600" />
+            <div class="work-media" data-mask>
+              <div class="media-inner" data-parallax="0.14">
+                <img src="assets/img/work-zero.jpg" alt="ZERO — متجر أحذية" loading="lazy" width="900" height="600" />
+              </div>
             </div>
             <div class="work-info">
               <div class="work-top"><span class="tag">تجارة إلكترونية</span><span class="year">2024</span></div>
@@ -331,6 +339,77 @@
         <p>عندك حاجة أكبر؟ <strong>إحنا جاهزين.</strong></p>
         <a href="#contact" class="link-arrow">اطلب البورتفوليو الكامل <span>←</span></a>
       </div>
+
+      <!-- ---- works wheel (3D) ---- -->
+      <div class="wheel-block" id="wheel">
+        <div class="wheel-block-head">
+          <div>
+            <span class="wheel-label">/ WHEEL — 08 أعمال</span>
+            <h3 class="wheel-h3" data-words>لفّة واحدة. تشوف الشغل كله.</h3>
+          </div>
+          <div class="wheel-head-right">
+            <p class="wheel-sub">
+              عجلة حقيقية في فراغ ثلاثي الأبعاد — اسحبها، استخدم الأسهم، أو سيبها تلف لوحدها.
+              الكارت اللي في النص هو اللي بتقرأه.
+            </p>
+            <div class="wheel-actions">
+              <button class="icon-btn" id="wheelPrev" type="button" aria-label="الكارت السابق">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+              </button>
+              <button class="icon-btn" id="wheelPlay" type="button" aria-label="إيقاف الدوران التلقائي" aria-pressed="false">
+                <svg class="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
+                <svg class="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>
+              </button>
+              <button class="icon-btn" id="wheelNext" type="button" aria-label="الكارت التالي">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="wheel" id="workWheel">
+          <div class="wheel-stage" id="wheelStage">
+            <div class="wheel-ring" id="wheelRing"></div>
+          </div>
+
+          <div class="wheel-hud" aria-hidden="true">
+            <span>WHEEL</span><span class="wheel-hud-count"><b id="wheelIndex">01</b> / 08</span>
+          </div>
+
+          <div class="wheel-caption" id="wheelCaption" aria-live="polite">
+            <span class="wheel-cat">هوية + تغليف</span>
+            <h4 class="wheel-title">بن القاهرة</h4>
+            <span class="wheel-year">2025</span>
+          </div>
+
+          <p class="wheel-hint">اسحب العجلة · أو استخدم ← →</p>
+        </div>
+
+        <noscript>
+          <ul class="wheel-fallback">
+            <li>بن القاهرة — هوية وتغليف</li>
+            <li>Pulse — تطبيق صحي</li>
+            <li>ساحل — حملة إطلاق</li>
+            <li>ZERO — متجر إلكتروني</li>
+            <li>ليلى — هوية أزياء</li>
+            <li>مطبخنا — تطبيق توصيل</li>
+            <li>نور — تغليف عناية</li>
+            <li>صدى — منصة صوت</li>
+          </ul>
+        </noscript>
+      </div>
+
+      <template id="wheelData">
+        <span data-name="بن القاهرة" data-cat="هوية + تغليف" data-year="2025" data-img="assets/img/work-coffee.jpg"></span>
+        <span data-name="Pulse" data-cat="منتج رقمي" data-year="2025" data-img="assets/img/work-pulse.jpg"></span>
+        <span data-name="ساحل" data-cat="حملة إطلاق" data-year="2024" data-img="assets/img/work-coast.jpg"></span>
+        <span data-name="ZERO" data-cat="تجارة إلكترونية" data-year="2024" data-img="assets/img/work-zero.jpg"></span>
+        <span data-name="ليلى" data-cat="هوية أزياء" data-year="2025" data-img="assets/img/work-layla.jpg"></span>
+        <span data-name="مطبخنا" data-cat="تطبيق توصيل" data-year="2024" data-img="assets/img/work-matbakh.jpg"></span>
+        <span data-name="نور" data-cat="تغليف عناية" data-year="2025" data-img="assets/img/work-nour.jpg"></span>
+        <span data-name="صدى" data-cat="منصة صوت" data-year="2023" data-img="assets/img/work-sada.jpg"></span>
+      </template>
+
     </div>
   </section>
 
@@ -339,7 +418,7 @@
     <div class="container">
       <header class="sec-head">
         <span class="sec-index">/03</span>
-        <h2 class="sec-title">بنشتغل من أول الاسم<br />لآخر نقرة.</h2>
+        <h2 class="sec-title" data-words>بنشتغل من أول الاسم<br />لآخر نقرة.</h2>
         <p class="sec-lead">
           مش لازم تاخد كل حاجة. اختار اللي محتاجه — أو خلينا نقولك إيه اللي هيفرق فعلاً في أرقامك.
         </p>
@@ -469,13 +548,13 @@
     <div class="container">
       <header class="sec-head">
         <span class="sec-index">/04</span>
-        <h2 class="sec-title">أربع خطوات.<br />صفر مفاجآت.</h2>
+        <h2 class="sec-title" data-words>أربع خطوات.<br />صفر مفاجآت.</h2>
         <p class="sec-lead">
           كل مرحلة ليها مخرج محدّد وموعد محدّد. إنت بتشوف كل حاجة أول بأول، وبتوافق قبل ما نكمّل.
         </p>
       </header>
 
-      <ol class="steps">
+      <ol class="steps" data-steps>
         <li class="step" data-reveal>
           <span class="step-num">01</span>
           <div class="step-body">
@@ -517,7 +596,7 @@
     <div class="container">
       <header class="sec-head">
         <span class="sec-index">/05</span>
-        <h2 class="sec-title">باقات واضحة.<br />من غير نجوم صغيرة.</h2>
+        <h2 class="sec-title" data-words>باقات واضحة.<br />من غير نجوم صغيرة.</h2>
         <p class="sec-lead">
           السعر اللي بتشوفه هو السعر اللي بتدفعه. أي إضافة بنتفق عليها كتابةً قبل ما نبدأ الشغل.
         </p>
@@ -591,7 +670,7 @@
     <div class="container">
       <header class="sec-head">
         <span class="sec-index">/06</span>
-        <h2 class="sec-title">إحنا بنتكلم بالأرقام.<br />هما بالكلام.</h2>
+        <h2 class="sec-title" data-words>إحنا بنتكلم بالأرقام.<br />هما بالكلام.</h2>
       </header>
 
       <div class="slider" id="slider" aria-roledescription="عرض شرائح" aria-label="آراء العملاء">
@@ -665,7 +744,7 @@
     <div class="container faq-inner">
       <div class="faq-head">
         <span class="sec-index">/07</span>
-        <h2 class="sec-title">اسأل براحتك.</h2>
+        <h2 class="sec-title" data-words>اسأل براحتك.</h2>
         <p class="sec-lead">لو مش لاقي سؤالك، ابعتلنا على واتساب وهنرد في دقايق.</p>
         <a href="#contact" class="link-arrow">تواصل معانا <span>←</span></a>
       </div>
@@ -859,7 +938,17 @@
   <span class="toast-text" id="toastText"></span>
 </div>
 
+<div class="mini-cta" id="miniCta">
+  <span class="mini-cta-label">عندك مشروع؟</span>
+  <a href="#contact" class="mini-cta-btn">
+    <span>يلا نبدأ</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+  </a>
+</div>
+
 <script src="assets/js/blackhole.js"></script>
+<script src="assets/js/wheel.js"></script>
+<script src="assets/js/scroll.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>
