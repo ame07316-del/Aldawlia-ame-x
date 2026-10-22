@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AMK — استوديو بيصنع هزة</title>
+<meta name="description" content="AMK استوديو براندنج وتجارب رقمية. هويات جريئة، مواقع سريعة، ومحتوى بيوقّف السكرول. من الفكرة لأول مبيعة — من غير لف ودوران." />
+<meta name="theme-color" content="#08080a" />
+<meta name="author" content="AMK Studio" />
+<meta property="og:title" content="AMK — استوديو بيصنع هزة" />
+<meta property="og:description" content="براندك محتاج هزة… إحنا بنعملها. هوية · ويب · محتوى · حملات." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://amk.studio" />
+<meta property="og:image" content="https://amk.studio/assets/img/og-amk.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AMK — استوديو بيصنع هزة" />
+<meta name="twitter:image" content="https://amk.studio/assets/img/og-amk.jpg" />
+<link rel="canonical" href="https://amk.studio/" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%2308080a'/%3E%3Cpath d='M22 74 39 26h10l17 48H55l-3-9H36l-3 9zm17-18h8l-4-13z' fill='%23d6ff3f'/%3E%3Cpath d='M64 74V26h9v18l12-18h11L82 48l15 26H85L73 53l-1 1v20z' fill='%23ff2e93'/%3E%3C/svg%3E" />
+<link rel="preload" href="assets/fonts/alexandria-var.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="assets/fonts/plex-400.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="assets/css/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "AMK Studio",
+  "alternateName": "AMK",
+  "url": "https://amk.studio",
+  "logo": "https://amk.studio/assets/img/og-amk.jpg",
+  "image": "https://amk.studio/assets/img/og-amk.jpg",
+  "description": "استوديو براندنج وتجارب رقمية: هويات بصرية، مواقع ومنتجات رقمية، محتوى، وحملات إطلاق.",
+  "email": "hello@amk.studio",
+  "telephone": "+20-100-000-0000",
+  "priceRange": "12,000 - 75,000 EGP",
+  "address": { "@type": "PostalAddress", "addressLocality": "Fayoum", "addressCountry": "EG" },
+  "areaServed": ["EG", "SA", "AE", "KW", "QA"],
+  "sameAs": ["https://www.instagram.com/", "https://www.behance.net/", "https://www.linkedin.com/"]
+}
+</script>
+</head>
+<body class="preloading">
+<noscript><style>.preloader{display:none!important}.reveal,[data-reveal]{opacity:1!important;transform:none!important}.hero-title .word{transform:none!important;opacity:1!important}.cursor,.grain{display:none}</style></noscript>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-dot"></span><span class="cursor-ring"></span></div>
+<div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- ================= PRELOADER ================= -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader-inner">
+    <div class="preloader-word">
+      <span>A</span><span>M</span><span>K</span>
+    </div>
+    <div class="preloader-bar"><i id="preloaderBar"></i></div>
+    <div class="preloader-meta">
+      <span>EST. 2019 — FAYOUM / CAIRO</span>
+      <span id="preloaderCount">00</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="siteHeader">
+  <a href="#top" class="brand" aria-label="AMK — الرئيسية">
+    <span class="brand-mark">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M8 70 26 18h12l18 52H48l-3.4-10.4H29.4L26 70zm24.6-20.6h8.2L36.7 33z"/>
+        <path d="M60 70V18h11v19.6L84.4 18H97L80.6 44 98 70H85L71 47.8V70z"/>
+      </svg>
+    </span>
+    <span class="brand-text">AMK</span>
+    <span class="brand-dot"></span>
+  </a>
+
+  <nav class="nav" aria-label="التنقل الرئيسي">
+    <a href="#work" class="nav-link">الأعمال</a>
+    <a href="#services" class="nav-link">الخدمات</a>
+    <a href="#process" class="nav-link">طريقة العمل</a>
+    <a href="#pricing" class="nav-link">الأسعار</a>
+    <a href="#faq" class="nav-link">أسئلة</a>
+  </nav>
+
+  <div class="header-actions">
+    <button class="icon-btn" id="themeToggle" type="button" aria-label="تبديل الوضع الليلي والنهاري" title="تبديل الوضع">
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/></svg>
+    </button>
+    <a href="#contact" class="btn btn-primary btn-sm magnetic" data-strength="14">
+      <span>يلا نبدأ</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+    </a>
+    <button class="burger" id="burger" type="button" aria-label="القائمة" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+  <span class="header-line" aria-hidden="true"></span>
+</header>
+
+<!-- ================= MOBILE MENU ================= -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav aria-label="قائمة الموبايل">
+    <a href="#work"><i>01</i> الأعمال</a>
+    <a href="#services"><i>02</i> الخدمات</a>
+    <a href="#process"><i>03</i> طريقة العمل</a>
+    <a href="#pricing"><i>04</i> الأسعار</a>
+    <a href="#faq"><i>05</i> أسئلة شائعة</a>
+    <a href="#contact" class="mobile-cta">يلا نبدأ <span>→</span></a>
+  </nav>
+  <div class="mobile-menu-foot">
+    <span>hello@amk.studio</span>
+    <span>amk.studio</span>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="hero">
+    <div class="hero-aura" aria-hidden="true"></div>
+    <div class="hero-grid-lines" aria-hidden="true"></div>
+    <div class="hero-watermark" aria-hidden="true">AMK</div>
+
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow reveal" data-reveal>
+          <span class="pulse"></span>
+          استوديو براندنج وتجارب رقمية — الفيوم / القاهرة
+        </div>
+
+        <h1 class="hero-title">
+          <span class="line"><span class="word">براندك</span> <span class="word">محتاج</span></span>
+          <span class="line"><span class="word accent">هــزة</span><span class="word">…</span></span>
+          <span class="line"><span class="word outline">إحنا</span> <span class="word">بنعملها.</span></span>
+        </h1>
+
+        <p class="hero-sub reveal" data-reveal data-delay="120">
+          <strong>AMK</strong> استوديو بيبني هويات ومواقع بتخلّي السوق يلتفت. استراتيجية جريئة، تصميم مش بيتردّد،
+          وكود بيجري. من الفكرة لأول مبيعة — <em>من غير لف ودوران.</em>
+        </p>
+
+        <div class="hero-actions reveal" data-reveal data-delay="200">
+          <a href="#contact" class="btn btn-primary magnetic" data-strength="18">
+            <span>يلا نولّع الفكرة</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          </a>
+          <a href="#work" class="btn btn-ghost">
+            <span>بص على الشغل</span>
+            <span class="btn-dot"></span>
+          </a>
+        </div>
+
+        <div class="hero-stats reveal" data-reveal data-delay="280">
+          <div class="stat">
+            <b><span class="count" data-count="120">0</span><i>+</i></b>
+            <span>مشروع طالع للنور</span>
+          </div>
+          <div class="stat">
+            <b><span class="count" data-count="3.8" data-decimals="1">0</span><i>x</i></b>
+            <span>متوسط نمو المبيعات</span>
+          </div>
+          <div class="stat">
+            <b><span class="count" data-count="14">0</span></b>
+            <span>جائزة وتقدير</span>
+          </div>
+          <div class="stat">
+            <b><span class="count" data-count="9">0</span></b>
+            <span>سوق بنشتغل فيه</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" data-reveal data-delay="240">
+        <div class="visual-stack" data-tilt>
+          <figure class="visual-card">
+            <img src="assets/img/work-coffee.jpg" alt="مشروع بن القاهرة — هوية بصرية وتغليف" width="900" height="1350" fetchpriority="high" />
+            <figcaption>
+              <span class="tag">هوية / تصوير</span>
+              <strong>بن القاهرة</strong>
+            </figcaption>
+          </figure>
+          <div class="visual-chip chip-a">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 18 9 8l4 6 3-4 4 8z"/></svg>
+            <div><b>+312%</b><span>تفاعل</span></div>
+          </div>
+          <div class="visual-chip chip-b">
+            <span class="live-dot"></span>
+            <div><b>LIVE</b><span>إطلاق جديد</span></div>
+          </div>
+        </div>
+
+        <div class="hero-badge">
+          <svg class="spin-text" viewBox="0 0 200 200" aria-hidden="true">
+            <defs><path id="badgeCircle" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" /></defs>
+            <text text-anchor="middle"><textPath href="#badgeCircle" startOffset="25%">AMK STUDIO ✦ MAKE IT LOUD ✦</textPath></text>
+          </svg>
+          <span class="badge-arrow">↓</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="#manifesto" class="scroll-cue" aria-label="انزل للأسفل">
+      <span>انزل</span>
+      <i></i>
+    </a>
+  </section>
+
+  <!-- ================= TICKER ================= -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="tickerTrack">
+      <span>هوية</span><i>✦</i><span class="fill">ويب</span><i>✦</i><span>محتوى</span><i>✦</i><span class="fill">حملات</span><i>✦</i><span>موشن</span><i>✦</i><span class="fill">تجربة مستخدم</span><i>✦</i><span>إطلاق</span><i>✦</i><span class="fill">نمو</span><i>✦</i>
+      <span>هوية</span><i>✦</i><span class="fill">ويب</span><i>✦</i><span>محتوى</span><i>✦</i><span class="fill">حملات</span><i>✦</i><span>موشن</span><i>✦</i><span class="fill">تجربة مستخدم</span><i>✦</i><span>إطلاق</span><i>✦</i><span class="fill">نمو</span><i>✦</i>
+    </div>
+  </div>
+
+  <!-- ================= MANIFESTO ================= -->
+  <section class="section manifesto" id="manifesto">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i>01</i> إحنا مين</span>
+          <h2 class="section-title">
+            مش وكالة تانية.<br />
+            إحنا <span class="mark">مسرّع</span> للبراندات اللي عندها جرأة.
+          </h2>
+        </div>
+        <p class="section-lead">
+          السوق مليان تصميمات حلوة ومفيش حد فاكرها. إحنا بنشتغل على العكس: فكرة واحدة قوية،
+          تنفيذ نضيف، وصوت عالي. بنبدأ من سؤال واحد — <strong>ليه حد يهتم؟</strong> — وبنبني كل حاجة حواليه.
+        </p>
+      </div>
+
+      <div class="manifesto-grid">
+        <article class="m-card" data-reveal>
+          <span class="m-num">01</span>
+          <h3>استراتيجية قبل البكسل</h3>
+          <p>بنفهم عميلك ومنافسك والأرقام قبل ما نفتح أي برنامج تصميم. القرار الصح بيوفر شهور.</p>
+          <span class="m-line"></span>
+        </article>
+        <article class="m-card" data-reveal data-delay="80">
+          <span class="m-num">02</span>
+          <h3>تصميم بيوقف السكرول</h3>
+          <p>مش بس شكل حلو — لحظة بصرية تخلي الإصبع يبطّأ. تفاصيل، حركة، وصوت براند ثابت.</p>
+          <span class="m-line"></span>
+        </article>
+        <article class="m-card" data-reveal data-delay="160">
+          <span class="m-num">03</span>
+          <h3>كود بسرعة الضوء</h3>
+          <p>مواقع بتفتح في أقل من ثانية، متوافقة مع كل شاشة، وجاهزة تتوسّع مع نمو البيزنس.</p>
+          <span class="m-line"></span>
+        </article>
+      </div>
+
+      <div class="manifesto-quote" data-reveal>
+        <p>
+          «إحنا مش بنبيع تصاميم. إحنا بنبيع <span class="hl">لحظة ما حد يشوفك يقول: مين دول؟</span>»
+        </p>
+        <div class="quote-author">
+          <span class="avatar">ع</span>
+          <div><b>عمر خالد</b><span>المؤسس والمدير الإبداعي</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WORK ================= -->
+  <section class="section work" id="work">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i>02</i> الأعمال</span>
+          <h2 class="section-title">شغل اتكلم<br />بدل ما يتكلموا عنه.</h2>
+        </div>
+        <div class="work-head-right">
+          <p class="section-lead">أربع حكايات من أصل 120. كل واحدة بدأت بفكرة مجنونة… وخلصت برقم.</p>
+          <div class="filters" id="filters" role="tablist" aria-label="تصفية الأعمال">
+            <button class="chip is-active" data-filter="all" type="button">الكل</button>
+            <button class="chip" data-filter="brand" type="button">هوية</button>
+            <button class="chip" data-filter="digital" type="button">منتج رقمي</button>
+            <button class="chip" data-filter="campaign" type="button">حملات</button>
+            <button class="chip" data-filter="ecom" type="button">تجارة إلكترونية</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-grid" id="workGrid">
+        <article class="work-card work-card--wide" data-cat="brand" data-reveal>
+          <a href="#contact" class="work-link" aria-label="بن القاهرة — هوية بصرية">
+            <div class="work-media">
+              <img src="assets/img/work-coffee.jpg" alt="بن القاهرة — هوية وتغليف" loading="lazy" width="900" height="1350" />
+              <span class="work-glow" aria-hidden="true"></span>
+            </div>
+            <div class="work-info">
+              <div class="work-top">
+                <span class="tag">هوية + تغليف</span>
+                <span class="year">2025</span>
+              </div>
+              <h3>بن القاهرة</h3>
+              <p>براند قهوة اختفى من الرف… وظهر في الترند. هوية كاملة، تغليف، وصور بتوّلع الشهية.</p>
+              <div class="work-metrics">
+                <span><b>+312%</b> تفاعل</span>
+                <span><b>4 أسابيع</b> تنفيذ</span>
+              </div>
+              <span class="work-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </div>
+          </a>
+        </article>
+
+        <article class="work-card" data-cat="digital" data-reveal data-delay="80">
+          <a href="#contact" class="work-link" aria-label="Pulse — تطبيق صحي">
+            <div class="work-media">
+              <img src="assets/img/work-pulse.jpg" alt="Pulse — تطبيق صحي" loading="lazy" width="900" height="600" />
+              <span class="work-glow" aria-hidden="true"></span>
+            </div>
+            <div class="work-info">
+              <div class="work-top"><span class="tag">منتج رقمي</span><span class="year">2025</span></div>
+              <h3>Pulse</h3>
+              <p>تطبيق تتبّع صحي بواجهة بتخلي الالتزام لعبة مش واجب.</p>
+              <div class="work-metrics"><span><b>40K</b> مستخدم</span><span><b>4.8★</b> تقييم</span></div>
+              <span class="work-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </div>
+          </a>
+        </article>
+
+        <article class="work-card" data-cat="campaign" data-reveal data-delay="120">
+          <a href="#contact" class="work-link" aria-label="ساحل — حملة إطلاق">
+            <div class="work-media">
+              <img src="assets/img/work-coast.jpg" alt="ساحل — حملة منتجع" loading="lazy" width="900" height="600" />
+              <span class="work-glow" aria-hidden="true"></span>
+            </div>
+            <div class="work-info">
+              <div class="work-top"><span class="tag">حملة إطلاق</span><span class="year">2024</span></div>
+              <h3>ساحل</h3>
+              <p>موسم كامل اتحجز قبل ما يبدأ. حملة 360 على أرض الواقع وأونلاين.</p>
+              <div class="work-metrics"><span><b>+68%</b> حجوزات</span><span><b>1.2M</b> وصول</span></div>
+              <span class="work-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </div>
+          </a>
+        </article>
+
+        <article class="work-card work-card--wide" data-cat="ecom" data-reveal data-delay="160">
+          <a href="#contact" class="work-link" aria-label="ZERO — متجر إلكتروني">
+            <div class="work-media">
+              <img src="assets/img/work-zero.jpg" alt="ZERO — متجر أحذية" loading="lazy" width="900" height="600" />
+              <span class="work-glow" aria-hidden="true"></span>
+            </div>
+            <div class="work-info">
+              <div class="work-top"><span class="tag">تجارة إلكترونية</span><span class="year">2024</span></div>
+              <h3>ZERO</h3>
+              <p>متجر أحذية اتقفل واتبنى من الأول: تجربة شراء في 40 ثانية و3 نقط تحويل.</p>
+              <div class="work-metrics"><span><b>3.8x</b> مبيعات</span><span><b>-41%</b> تخلي سلة</span></div>
+              <span class="work-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </div>
+          </a>
+        </article>
+      </div>
+
+      <div class="work-foot" data-reveal>
+        <p>عندك حاجة أكبر؟ <strong>إحنا جاهزين.</strong></p>
+        <a href="#contact" class="link-arrow">اطلب البورتفوليو الكامل <span>←</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="section services" id="services">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i>03</i> الخدمات</span>
+          <h2 class="section-title">بنشتغل<br />من أول الاسم… لآخر نقرة.</h2>
+        </div>
+        <p class="section-lead">
+          مش لازم تاخد كل حاجة. اختار اللي محتاجه — أو خلينا نقولك إيه اللي هيفرق فعلاً في أرقامك.
+        </p>
+      </div>
+
+      <div class="accordion" id="servicesAccordion">
+        <article class="acc-item is-open">
+          <button class="acc-head" type="button" aria-expanded="true">
+            <span class="acc-num">01</span>
+            <span class="acc-title">استراتيجية وهوية بصرية</span>
+            <span class="acc-tags"><i>Naming</i><i>Logo</i><i>Guidelines</i></span>
+            <span class="acc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-in">
+              <p>
+                بنحفر مكانك في دماغ السوق: موقع البراند، شخصيته، صوته، ونظام بصري كامل يقدر أي حد
+                يشتغل عليه من غير ما يبوّظ الشكل. اسم، لوجو، ألوان، خطوط، ودليل استخدام بيفضل معاك سنين.
+              </p>
+              <ul class="acc-list">
+                <li>أبحاث سوق ووضع تنافسي</li>
+                <li>Naming + Tagline + Brand Voice</li>
+                <li>هوية كاملة + دليل استخدام PDF</li>
+                <li>تطبيقات: تغليف، مطبوعات، سوشيال</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-num">02</span>
+            <span class="acc-title">مواقع ومنتجات رقمية</span>
+            <span class="acc-tags"><i>Web</i><i>E-commerce</i><i>Product</i></span>
+            <span class="acc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-in">
+              <p>
+                مواقع بتفتح بسرعة، بتتحرك بحس، وبتخلي الزائر يعمل اللي إنت عايزه — يشتري، يحجز،
+                أو يسيب رقمه. بنسلّم كود نضيف، لوحة تحكم سهلة، وتحسين SEO من أول يوم.
+              </p>
+              <ul class="acc-list">
+                <li>تصميم UI/UX + Prototype تفاعلي</li>
+                <li>مواقع تعريفية ولاندنج بيجز</li>
+                <li>متاجر إلكترونية وربط الدفع والشحن</li>
+                <li>سرعة، SEO، وتحليلات مثبّتة</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-num">03</span>
+            <span class="acc-title">محتوى وسوشيال ميديا</span>
+            <span class="acc-tags"><i>Content</i><i>Motion</i><i>Community</i></span>
+            <span class="acc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-in">
+              <p>
+                محتوى مش بيعيد نفس الفكرة بشكل مختلف. تقويم شهري واضح، تصوير وإخراج، وموشن
+                بيرفع نسبة المشاهدة — مع تقارير بتقولك إيه اللي شغال وإيه اللي نقتله.
+              </p>
+              <ul class="acc-list">
+                <li>تقويم محتوى شهري + كوبي رايتنج</li>
+                <li>تصوير فوتوغرافي وإنتاج فيديو</li>
+                <li>موشن جرافيك وReels</li>
+                <li>إدارة المجتمع والردود</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-num">04</span>
+            <span class="acc-title">حملات وإطلاق</span>
+            <span class="acc-tags"><i>Launch</i><i>Ads</i><i>Growth</i></span>
+            <span class="acc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-in">
+              <p>
+                الإطلاق مش بوست. إحنا بنبني لحظة: تشويق، عد تنازلي، تجربة على الأرض،
+                وحملات مدفوعة مقسمة بدقة على الجمهور الصح — وبعدها بنقيس وبنعدّل كل أسبوع.
+              </p>
+              <ul class="acc-list">
+                <li>خطة إطلاق 30/60/90 يوم</li>
+                <li>حملات Meta / Google / TikTok</li>
+                <li>Landing pages مخصصة للتحويل</li>
+                <li>تقارير أداء أسبوعية</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-num">05</span>
+            <span class="acc-title">موشن وفيديو</span>
+            <span class="acc-tags"><i>3D</i><i>CGI</i><i>Edit</i></span>
+            <span class="acc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-in">
+              <p>
+                من لوجو بيتحرك في ثانية ونص، لفيلم منتج ثلاثي الأبعاد يخلي العميل يقول «إزاي عملوا ده؟».
+                إنتاج كامل من السكربت للجرافيك للمونتاج والصوت.
+              </p>
+              <ul class="acc-list">
+                <li>Logo animation وساوند ديزاين</li>
+                <li>CGI وفيلم منتج 3D</li>
+                <li>إعلانات فيديو للـAds</li>
+                <li>مونتاج وتصحيح ألوان</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS ================= -->
+  <section class="section process" id="process">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i>04</i> طريقة العمل</span>
+          <h2 class="section-title">4 خطوات.<br />صفر مفاجآت.</h2>
+        </div>
+        <p class="section-lead">
+          كل مرحلة ليها مخرج محدّد وموعد محدّد. إنت بتشوف كل حاجة أول بأول، وبتوافق قبل ما نكمّل.
+        </p>
+      </div>
+
+      <ol class="steps">
+        <li class="step" data-reveal>
+          <span class="step-num">01</span>
+          <h3>نسمع ونفهم</h3>
+          <p>جلسة اكتشاف 90 دقيقة + تحليل السوق والمنافسين. بنخرج بتقرير فرص واضح.</p>
+          <span class="step-time">أسبوع 1</span>
+        </li>
+        <li class="step" data-reveal data-delay="80">
+          <span class="step-num">02</span>
+          <h3>نرسم الخطة</h3>
+          <p>استراتيجية، رسالة البراند، وهيكل تجربة المستخدم. بنتفق على الاتجاه قبل التصميم.</p>
+          <span class="step-time">أسبوع 2</span>
+        </li>
+        <li class="step" data-reveal data-delay="160">
+          <span class="step-num">03</span>
+          <h3>نصمم ونبني</h3>
+          <p>تصميم، تطوير، محتوى — في سباقات أسبوعية بمراجعات قصيرة وسريعة.</p>
+          <span class="step-time">أسبوع 3–6</span>
+        </li>
+        <li class="step" data-reveal data-delay="240">
+          <span class="step-num">04</span>
+          <h3>نطلق ونكبّر</h3>
+          <p>إطلاق، قياس، وتحسين مستمر. 30 يوم متابعة بعد التسليم على حسابنا.</p>
+          <span class="step-time">بعد التسليم</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= PRICING ================= -->
+  <section class="section pricing" id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i>05</i> الأسعار</span>
+          <h2 class="section-title">باقات واضحة.<br />من غير نجوم صغيرة.</h2>
+        </div>
+        <p class="section-lead">
+          السعر اللي بتشوفه هو السعر اللي بتدفعه. أي إضافة بنتفق عليها كتابةً قبل ما نبدأ الشغل.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <article class="plan" data-reveal>
+          <div class="plan-top">
+            <span class="plan-name">شرارة</span>
+            <span class="plan-en">SPARK</span>
+          </div>
+          <p class="plan-desc">للمشاريع الناشئة اللي عايزة تبان جدّية من أول يوم.</p>
+          <div class="plan-price"><span class="cur">ج.م</span><b>12,000</b><span class="per">/ للمشروع</span></div>
+          <ul class="plan-list">
+            <li>هوية بصرية أساسية</li>
+            <li>لاندنج بيج صفحة واحدة</li>
+            <li>5 تصاميم سوشيال</li>
+            <li>مراجعتين</li>
+            <li>تسليم في 2–3 أسابيع</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost btn-block">اختار شرارة</a>
+        </article>
+
+        <article class="plan plan--featured" data-reveal data-delay="80">
+          <span class="plan-badge">الأكثر طلباً ✦</span>
+          <div class="plan-top">
+            <span class="plan-name">صاعقة</span>
+            <span class="plan-en">BOLT</span>
+          </div>
+          <p class="plan-desc">الباقة اللي بتقلب شكل البراند بالكامل في شهر.</p>
+          <div class="plan-price"><span class="cur">ج.م</span><b>35,000</b><span class="per">/ للمشروع</span></div>
+          <ul class="plan-list">
+            <li>هوية كاملة + دليل استخدام</li>
+            <li>موقع 5 صفحات + لوحة تحكم</li>
+            <li>15 تصميم سوشيال + كوبي</li>
+            <li>موشن لوجو + ساوند ديزاين</li>
+            <li>شهر دعم وتحسين</li>
+            <li>تسليم في 4–6 أسابيع</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary btn-block">يلا نبدأ</a>
+        </article>
+
+        <article class="plan" data-reveal data-delay="160">
+          <div class="plan-top">
+            <span class="plan-name">زلزال</span>
+            <span class="plan-en">QUAKE</span>
+          </div>
+          <p class="plan-desc">شراكة كاملة لفريق بيفكر يتوسّع بسرعة.</p>
+          <div class="plan-price"><span class="cur">ج.م</span><b>75,000</b><span class="per">/ تبدأ من</span></div>
+          <ul class="plan-list">
+            <li>استراتيجية 360 كاملة</li>
+            <li>منتج رقمي أو متجر كامل</li>
+            <li>إدارة سوشيال 3 شهور</li>
+            <li>حملة إطلاق + ميزانية إعلانية منفصلة</li>
+            <li>فريق مخصص ومدير حساب</li>
+            <li>تقارير أسبوعية</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost btn-block">اطلب عرض</a>
+        </article>
+      </div>
+
+      <div class="pricing-note" data-reveal>
+        <span>💡</span>
+        <p>مش متأكد إيه اللي محتاجه؟ <a href="#contact">ابعت تفاصيل مشروعك</a> وهنرد عليك بترشيح مكتوب — مجاناً.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIALS ================= -->
+  <section class="section testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i>06</i> كلام العملاء</span>
+          <h2 class="section-title">إحنا بنتكلم<br />بالأرقام. هما بالكلام.</h2>
+        </div>
+      </div>
+
+      <div class="slider" id="slider">
+        <div class="slider-track" id="sliderTrack">
+          <figure class="slide">
+            <div class="stars" aria-label="5 من 5">★★★★★</div>
+            <blockquote>
+              من أول اجتماع حسّينا إن حد فاهم البيزنس بتاعنا مش بس بياخد بريف. الهوية الجديدة
+              غيّرت شكل المنتج على الرف، والتفاعل زاد 3 أضعاف في شهرين.
+            </blockquote>
+            <figcaption>
+              <span class="avatar">س</span>
+              <div><b>سارة منصور</b><span>مؤسسة «بن القاهرة»</span></div>
+            </figcaption>
+          </figure>
+          <figure class="slide">
+            <div class="stars" aria-label="5 من 5">★★★★★</div>
+            <blockquote>
+              المتجر الجديد طلع بيشتري لوحده. التحويل زاد، الدعم قلّ، وفريق AMK كان بيرد في نفس
+              اليوم على أي تعديل. ده اللي بنسميه شريك مش مورد.
+            </blockquote>
+            <figcaption>
+              <span class="avatar">م</span>
+              <div><b>محمود العزب</b><span>شريك مؤسس — ZERO</span></div>
+            </figcaption>
+          </figure>
+          <figure class="slide">
+            <div class="stars" aria-label="5 من 5">★★★★★</div>
+            <blockquote>
+              الحملة اللي عملوها خلّت الموسم كله يتحجز قبل ما يبدأ. أفكار جريئة، تنفيذ مظبوط،
+              وتقارير بتقولك كل جنيه راح فين.
+            </blockquote>
+            <figcaption>
+              <span class="avatar">ن</span>
+              <div><b>نور الشرقاوي</b><span>مديرة التسويق — ساحل</span></div>
+            </figcaption>
+          </figure>
+          <figure class="slide">
+            <div class="stars" aria-label="5 من 5">★★★★★</div>
+            <blockquote>
+              تطبيق Pulse كان فكرة على ورقة. AMK حوّلوها لمنتج 40 ألف مستخدم بيستخدموه كل يوم،
+              وواجهة بتتصوّر وتنتشر لوحدها.
+            </blockquote>
+            <figcaption>
+              <span class="avatar">ي</span>
+              <div><b>يوسف رامي</b><span>مدير المنتج — Pulse</span></div>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="slider-controls">
+          <div class="slider-dots" id="sliderDots"></div>
+          <div class="slider-arrows">
+            <button type="button" class="icon-btn" id="prevSlide" aria-label="السابق">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            </button>
+            <button type="button" class="icon-btn" id="nextSlide" aria-label="التالي">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="section faq" id="faq">
+    <div class="container faq-inner">
+      <div class="faq-head">
+        <span class="kicker"><i>07</i> أسئلة شائعة</span>
+        <h2 class="section-title">اسأل براحتك.</h2>
+        <p class="section-lead">لو مش لاقي سؤالك، ابعتلنا على واتساب وهنرد في دقايق.</p>
+        <a href="#contact" class="link-arrow">تواصل معانا <span>←</span></a>
+      </div>
+
+      <div class="accordion accordion--faq" id="faqAccordion">
+        <article class="acc-item is-open">
+          <button class="acc-head" type="button" aria-expanded="true">
+            <span class="acc-title">مشروع كامل بياخد وقت قد إيه؟</span>
+            <span class="acc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="acc-body"><div class="acc-body-in"><p>الهوية الأساسية 2–3 أسابيع، والموقع 4–6 أسابيع، والباقة الكاملة 6–8 أسابيع. بنحدد الجدول في أول اجتماع وبنلتزم بيه — وبنبلغك فوراً لو حاجة اتغيّرت.</p></div></div>
+        </article>
+        <article class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-title">بتشتغلوا مع شركات خارج مصر؟</span>
+            <span class="acc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="acc-body"><div class="acc-body-in"><p>أيوه. اشتغلنا مع عملاء في 9 أسواق، وبنشتغل أونلاين بالكامل مع اجتماعات أسبوعية، والتسليم بالعربي أو الإنجليزي. الدفع بالجنيه أو الدولار.</p></div></div>
+        </article>
+        <article class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-title">إيه نظام الدفع؟</span>
+            <span class="acc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="acc-body"><div class="acc-body-in"><p>50٪ مقدم عند بدء الشغل و50٪ عند التسليم. المشاريع الكبيرة بتتقسم على 3 دفعات مرتبطة بمراحل التنفيذ. وبنبعت عقد واضح ومعتمد.</p></div></div>
+        </article>
+        <article class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-title">بتسلموا ملفات المصدر؟</span>
+            <span class="acc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="acc-body"><div class="acc-body-in"><p>طبعاً. كل ملفات التصميم (Figma/AI/PSD)، الخطوط المرخّصة، وأكواد الموقع — ملكك بالكامل بعد آخر دفعة. مفيش احتكار ومفيش رسوم خفية.</p></div></div>
+        </article>
+        <article class="acc-item">
+          <button class="acc-head" type="button" aria-expanded="false">
+            <span class="acc-title">بتعملوا إعلانات مدفوعة؟</span>
+            <span class="acc-icon" aria-hidden="true"></span>
+          </button>
+          <div class="acc-body"><div class="acc-body-in"><p>بنعمل الاستراتيجية والإبداع وإدارة الحملة على Meta وGoogle وTikTok. ميزانية الإعلان نفسها بتتدفع لحسابك مباشرة — إحنا مش بناخد نسبة منها.</p></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT / CTA ================= -->
+  <section class="section contact" id="contact">
+    <div class="contact-aura" aria-hidden="true"></div>
+    <div class="container contact-inner">
+      <div class="contact-copy">
+        <span class="kicker"><i>08</i> يلا نبدأ</span>
+        <h2 class="contact-title">
+          عندك فكرة؟<br />
+          <span class="mark">خلّينا نولّعها.</span>
+        </h2>
+        <p>
+          ابعتلنا سطرين عن مشروعك. بنرد في أقل من 24 ساعة بترشيح واضح وخطوة أولى —
+          من غير عرض سعر مضخّم ولا مكالمات مضيعة.
+        </p>
+        <ul class="contact-list">
+          <li>
+            <span class="ci">✉</span>
+            <div><b>إيميل</b><a href="mailto:hello@amk.studio">hello@amk.studio</a></div>
+          </li>
+          <li>
+            <span class="ci">☎</span>
+            <div><b>واتساب</b><a href="tel:+201000000000" dir="ltr">+20 100 000 0000</a></div>
+          </li>
+          <li>
+            <span class="ci">⌖</span>
+            <div><b>المكان</b><span>الفيوم — القاهرة، مصر</span></div>
+          </li>
+        </ul>
+        <div class="contact-domain">
+          <span>الدومين الرسمي</span>
+          <a href="https://amk.studio" dir="ltr">amk.studio</a>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="field">
+          <label for="name">اسمك</label>
+          <input id="name" name="name" type="text" placeholder="مثال: أحمد سالم" required autocomplete="name" />
+          <span class="error" data-error-for="name"></span>
+        </div>
+        <div class="field">
+          <label for="email">الإيميل</label>
+          <input id="email" name="email" type="email" placeholder="you@company.com" required autocomplete="email" dir="ltr" />
+          <span class="error" data-error-for="email"></span>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="budget">الميزانية</label>
+            <select id="budget" name="budget">
+              <option value="">اختار...</option>
+              <option>أقل من 15000 ج.م</option>
+              <option>15000 – 40000 ج.م</option>
+              <option>40000 – 100000 ج.م</option>
+              <option>أكثر من 100000 ج.م</option>
+              <option>مش متأكد لسه</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="service">الخدمة</label>
+            <select id="service" name="service">
+              <option value="">اختار...</option>
+              <option>هوية بصرية</option>
+              <option>موقع / متجر</option>
+              <option>محتوى وسوشيال</option>
+              <option>حملة إطلاق</option>
+              <option>موشن وفيديو</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="message">احكيلي عن الفكرة</label>
+          <textarea id="message" name="message" rows="4" placeholder="مشروعي عبارة عن… وأنا محتاج…" required></textarea>
+          <span class="error" data-error-for="message"></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block magnetic" data-strength="10">
+          <span>ابعت البريف</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        </button>
+        <p class="form-note">بالضغط على «ابعت البريف» إنت موافق على إننا نتواصل معاك بخصوص مشروعك بس.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#top" class="brand brand--footer">
+          <span class="brand-mark">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <path d="M8 70 26 18h12l18 52H48l-3.4-10.4H29.4L26 70zm24.6-20.6h8.2L36.7 33z"/>
+              <path d="M60 70V18h11v19.6L84.4 18H97L80.6 44 98 70H85L71 47.8V70z"/>
+            </svg>
+          </span>
+          <span class="brand-text">AMK</span>
+        </a>
+        <p>استوديو براندنج وتجارب رقمية. بنصنع الهزة اللي بتخلي السوق يلتفت.</p>
+        <div class="socials">
+          <a href="#" aria-label="إنستجرام">IG</a>
+          <a href="#" aria-label="لينكدإن">IN</a>
+          <a href="#" aria-label="بيهانس">BE</a>
+          <a href="#" aria-label="تيك توك">TT</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>الموقع</h4>
+        <a href="#work">الأعمال</a>
+        <a href="#services">الخدمات</a>
+        <a href="#process">طريقة العمل</a>
+        <a href="#pricing">الأسعار</a>
+        <a href="#faq">أسئلة شائعة</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>تواصل</h4>
+        <a href="mailto:hello@amk.studio">hello@amk.studio</a>
+        <a href="tel:+201000000000" dir="ltr">+20 100 000 0000</a>
+        <span>الفيوم / القاهرة، مصر</span>
+        <span id="localTime">—</span>
+      </div>
+
+      <div class="footer-col footer-news">
+        <h4>رسالة واحدة شهرياً</h4>
+        <p>أفكار براندنج وحالات عملية — من غير سبام.</p>
+        <form class="news-form" id="newsForm">
+          <input type="email" placeholder="إيميلك" aria-label="إيميل النشرة" required dir="ltr" />
+          <button type="submit" aria-label="اشترك">→</button>
+        </form>
+        <span class="news-msg" id="newsMsg"></span>
+      </div>
+    </div>
+
+    <div class="footer-domain" aria-hidden="true">amk.studio</div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> AMK Studio — كل الحقوق محفوظة.</span>
+      <span>صُنع بشغف في الفيوم ✦</span>
+      <a href="#top" class="to-top">للفوق ↑</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span class="toast-icon">✓</span>
+  <span class="toast-text" id="toastText"></span>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
