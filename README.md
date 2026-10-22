@@ -153,34 +153,117 @@ python3 -m http.server 8000 --bind 0.0.0.0
 
 أو ارفع المجلد زي ما هو على Vercel / Netlify / GitHub Pages.
 
-## النشر على Vercel (الدومين `amk.studio`)
+## 🚢 النشر على Vercel
 
-```bash
-npx vercel --prod
+الموقع **static بالكامل**: مفيش `package.json`، مفيش build step، مفيش تبعيات، مفيش صور تُعالَج وقت النشر.
+يعني Vercel مش محتاج غير ياخد الملفات زي ما هي ويخدمها. ده اللي بيوصّفه `vercel.json` الموجود في الجذر:
+
+```json
+{
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false
+}
 ```
 
-ثم Project → Domains → أضف `amk.studio` و `www.amk.studio`، وحدّد DNS عند المسجّل:
-
-| Type | Name | Value |
+| الحقل | القيمة | ليه |
 | --- | --- | --- |
-| A | @ | 76.76.21.21 |
-| CNAME | www | cname.vercel-dns.com |
+| `framework` | `null` | يلغي أي preset متخزّن على المشروع، فمفيش محاولة `npm run build` |
+| `buildCommand` | `null` | صريح: مفيش build |
+| `outputDirectory` | `.` | الجذر نفسه هو المخرج |
+| `cleanUrls` | `true` | `/index.html` بيعمل redirect لـ `/`، وبيخدم من غير `.html` |
+| `trailingSlash` | `false` | يمنع الـ308 اللي بيتعمل على `/` |
+
+> **ليه فحص Vercel على الـPR كان بيفشل؟**
+> لأن المشروع كان لسه مربوط بإعداد Framework Preset + Build Command جايين من الداشبورد، فـVercel بيحاول يعمل build
+> ويفشل (مفيش `package.json`). ملف `vercel.json` **بيتغلّب على إعدادات الداشبورد**، فبعد الدمج أول deployment هينجح.
+> لو الفحص لسه أحمر بعد كده، يبقى المشكلة في صلاحية الحساب/ربط المشروع مش في الكود — تتظبط من
+> **Project Settings → General**: Framework Preset = **Other**، Build Command = فاضي، Output Directory = `.`.
+
+### من الـCLI
+
+```bash
+npx vercel link          # يربط المجلد بمشروع
+npx vercel pull          # ينزّل إعدادات المشروع
+npx vercel --prod        # ينشر للإنتاج
+```
+
+### من الداشبورد
+
+1. **Add New → Project** → اختَر الريبو.
+2. Framework Preset = **Other** · Build Command = اسيبه فاضي · Output Directory = `.` · Root Directory = `./`.
+3. **Deploy**.
+
+### الدومين `amk.studio`
+
+Project → **Settings → Domains** → أضف `amk.studio` و `www.amk.studio`، وبعدها عند المسجّل:
+
+| Type | Name | Value | TTL |
+| --- | --- | --- | --- |
+| A | `@` | `76.76.21.21` | 3600 |
+| CNAME | `www` | `cname.vercel-dns.com` | 3600 |
+
+- خلي `www` يعمل **redirect** للدومين الأساسي (Vercel بيعملها أوتوماتيك لو ضفت الاتنين).
+- الشهادة SSL بتتولّد لوحدها بعد ما الـDNS ينتشر (من دقايق لساعات).
+- لو المسجّل بيدعم ALIAS/ANAME استخدمه على `@` بدل الـA record.
+
+### الكاش والهيدرز
+
+`vercel.json` بيحدّد سياسة الكاش لكل نوع ملف على حدة:
+
+| المسار | `Cache-Control` | السبب |
+| --- | --- | --- |
+| `/assets/fonts/*` | `public, max-age=31536000, immutable` | الخطوط نادراً ما تتغير، والاسم نفسه بيتغير لو الملف اتغير |
+| `/assets/img/*` | `public, max-age=2592000, stale-while-revalidate=86400` | 30 يوم + خدمة النسخة القديمة لحد ما الجديدة توصل |
+| `/assets/css/*` و `/assets/js/*` | `public, max-age=0, must-revalidate` | أسماء الملفات مش متعمولها hash، فالـETag لازم يتأكد كل مرة عشان التحديث يبان فوراً |
+| الباقي (`/`, `/robots.txt`, ...) | افتراضي Vercel | — |
+
++ هيدرز أمان على كل الردود: `X-Content-Type-Options: nosniff`، `X-Frame-Options: SAMEORIGIN`،
+`Referrer-Policy: strict-origin-when-cross-origin`، و`Permissions-Policy` بيقفل الكاميرا/المايك/الموقع.
+
+`cleanUrls` معناها إن `/index.html` بيحوّل لـ`/` — لو حطيت روابط في سوشيال استخدم `https://amk.studio/` من غير أي مسار.
+
+### التحقق بعد النشر
+
+```bash
+curl -sI https://amk.studio/ | head -12                       # 200 + الهيدرز
+curl -sI https://amk.studio/assets/js/wheel.js | grep -i cache # must-revalidate
+curl -sI https://amk.studio/assets/fonts/plex-400.woff2 | grep -i cache # immutable
+curl -s https://amk.studio/robots.txt                          # و sitemap.xml
+```
+
+### بدائل
+
+نفس المجلد بيشتغل زي ما هو على **Netlify** (`publish = "."`, build command فاضي)، **GitHub Pages**
+(ارفع من `main` → root)، أو أي استضافة static. `vercel.json` ملف خاص بـVercel ومش بيأثر على حد غيرها.
+
+### ملاحظة عن `.vercelignore`
+
+بيستبعد `README.md` و`.gitignore` من الـdeployment (مش محتاجين يتخدموا)، فحجم المرفوع أقل شوية.
 
 ## الهيكل
 
 ```
-index.html
+index.html             ← الصفحة الوحيدة (954 سطر، كل الأقسام /01…/08)
+vercel.json            ← إعداد النشر static + الكاش + هيدرز الأمان
+.vercelignore          ← README و .gitignore مش بيتنشروا
 assets/
-  css/style.css        ← نظام تصميم كامل بالمتغيرات + وضعين
+  css/style.css        ← نظام تصميم كامل بالمتغيرات + وضعين (1975 سطر)
   js/blackhole.js      ← الثقب الأسود (WebGL خام، بدون مكتبات)
   js/scroll.js         ← محرّك السكرول (parallax · reveal · rail · sticky CTA)
   js/wheel.js          ← عجلة الأعمال ثلاثية الأبعاد (drag · snap · autoplay)
   js/main.js           ← باقي التفاعلات (بدون مكتبات)
-  fonts/               ← woff2 مقتطعة ومستضافة محلياً (290KB)
-  img/                 ← صور المشاريع + og-amk.jpg
+  fonts/               ← 6 ملفات woff2 مقتطعة ومستضافة محلياً (284KB)
+  img/                 ← 8 صور مشاريع 720×900 + og-amk.jpg
 robots.txt
 sitemap.xml
 ```
+
+**الملفات الأربعة بتتحمّل بالترتيب:** `blackhole.js` (الهيرو) → `wheel.js` (العجلة) → `scroll.js` (السكرول)
+→ `main.js` (باقي التفاعلات). كلهم كلاسيكيين (مش modules) عشان يشتغلوا من `file://` كمان، وكلهم في آخر الـ`body`
+فمش بيوقفوا الرندر.
 
 ## تخصيص سريع
 
@@ -189,3 +272,80 @@ sitemap.xml
 - **الأسعار**: قسم `#pricing`.
 - **الأعمال**: كروت `.work-card` مع `data-cat` للفلترة.
 - **بيانات التواصل**: قسم `#contact` + الفوتر (بدّل الرقم والإيميل والسوشيال).
+
+---
+
+## 📊 الأداء والأحجام
+
+الأرقام دي من الملفات الفعلية على `main` (مش تقديرات):
+
+| الملف | خام | مضغوط gzip |
+| --- | --- | --- |
+| `index.html` | 50 KB | **11 KB** |
+| `assets/css/style.css` | 57 KB | **11 KB** |
+| `js/blackhole.js` | 28 KB | 8 KB |
+| `js/scroll.js` | 12 KB | 3 KB |
+| `js/wheel.js` | 10 KB | 3 KB |
+| `js/main.js` | 22 KB | 5 KB |
+| **كود الصفحة كله** | **179 KB** | **≈ 41 KB** |
+
+| الأصل | الحجم | ملاحظات |
+| --- | --- | --- |
+| الخطوط (6 ملفات woff2) | 284 KB | اثنين منهم `preload` الباقي بيتحمّل عند الاستخدام |
+| الصور (8 مشاريع + OG) | 1.1 MB | كلها `loading="lazy"` و`decoding="async"`، ومحدّد لها `width="720" height="900"` (المقاس الحقيقي) عشان مفيش layout shift |
+| **إجمالي الموقع** | **≈ 1.4 MB** | نص الكود المضغوط منه 41 KB بس |
+
+**مفيش أي طلب خارجي:** لا Google Fonts، لا CDN، لا تحليلات، لا مكتبات. الصفحة بتشتغل offline بالكامل.
+
+### اللي اتعمل عشان السرعة
+
+- `transform` و`opacity` بس في كل الأنيميشن — مفيش layout أو paint في الحلقة.
+- محرّك السكرول: حلقة `rAF` واحدة لكل الموقع، بتقف بعد ~520ms سكون وبتبطّل لما التاب يختفي.
+- الثقب الأسود بيرندر بدقة متغيّرة (0.56 افتراضي)، بيقلّلها لوحده لو الإطار نزل تحت 24fps، وبيموت خالص لما يخرج من الشاشة.
+- العجلة بترسم بس وقت الحركة، وموقع الكروت بيتحسب قبل الحركة مش كل إطار.
+- الصور كلها JPEG progressive مضغوطة يدوي على 720×900 (4:5) — مش صور خام.
+- `font-display: swap` + preload لأهم خطين عشان مفيش FOIT.
+- مفيش أي طلب API — الصفحة كلها HTML ثابت.
+
+---
+
+## 🧪 إزاي اتاختبر
+
+المتصفح الحقيقي مش متاح في بيئة التطوير (مفيش Chromium)، فاتعمل تحقق بديل بيغطي المنطق مش الشكل:
+
+| الاختبار | الأدوات | النتيجة |
+| --- | --- | --- |
+| السكرول × 3 بيئات (عادي / `prefers-reduced-motion` / بدون `IntersectionObserver`) | jsdom | صفر أخطاء كونسول، 38 span، مفيش تكرار متداخل، وكل مسار بيرجع للحالة النهائية الساكنة |
+| السكرول على مواضع تمرير متدرّجة | jsdom | نسبة السكرول / الـCTA المصغّر / خروج الهيرو كلهم صح |
+| العجلة: بناء الكروت + transforms + التنقل | jsdom | 8 كروت، نص القطر 371px، الأمامي بيتحدّث مع الهيدر (HUD) |
+| العجلة: أزرار / كيبورد / إيقاف | jsdom | `next`→02، `prev`→01، `ArrowLeft`→08، وزر الإيقاف بيقلب `aria-pressed` |
+| إسقاط العجلة ثلاثي الأبعاد | محاكاة بايثون (PIL) | لا كروت مقصوصة على 1280 و768، وكروت جانبية ظاهرة على 390 |
+| الثقب الأسود | محاكاة numpy للمُظلِّل | الهالة/الظل/الدوبلر مطابقين للمعادلة |
+| توازن الـCSS والـHTML | سكربت | 547/547 قوس، صفر مشاكل nested، كل الـ11 مرجع محلي موجود |
+
+### أخطاء حقيقية اتصلّحت أثناء الشغل
+
+1. `<template>` — `querySelectorAll` على عنصر الـtemplate بيرجع صفر، لازم `template.content`. قبل الإصلاح العجلة كانت بتبني **0 كروت**.
+2. boot مزدوج كان بيبني 16 كارت بدل 8 → اتضاف `data-wheel-ready` كـguard.
+3. clamp الـparallax كان بيتجاوز المساحة الفعلية → بقى محسوب من الـbleed الحقيقي.
+4. `documentElement.scrollHeight` بيرجع 0 في بعض البيئات → بقى `Math.max(body, docEl)`.
+5. تقسيم الكلمات كان بيعمل 18 span بدل 9 (تكرار متداخل) → `data-split` guard.
+6. العجلة كانت بتعرض 6 من 8 كروت مقصوصة على الموبايل → معادلة نصف قطر مختلفة تحت 620px.
+
+---
+
+## ✅ قبل النشر — شيك ليست
+
+- [ ] بدّل رقم الواتساب والتليفون في `#contact` والفوتر (دلوقتي أرقام مؤقتة).
+- [ ] بدّل `hello@amk.studio` بإيميل شغال فعلاً.
+- [ ] حدّث روابط السوشيال في الفوتر.
+- [ ] راجع أسعار الخطط (12,000 / 35,000 / 75,000+) وقسم FAQ.
+- [ ] تأكد إن `amk.studio` متاح واتشترى فعلاً، وأن `sitemap.xml` و`robots.txt` فيهم الدومين الصح.
+- [ ] استبدل `og-amk.jpg` بصورة OG نهائية لو الهوية اتغيرت، وشيك معاينة اللينك.
+- [ ] جرّب على موبايل حقيقي (iOS Safari) — الـWebGL والعجلة.
+
+---
+
+## 📄 الترخيص
+
+الكود والتصميم لـ**AMK Studio**. الخطوط مفتوحة المصدر: Alexandria، IBM Plex Sans Arabic (SIL OFL)، Anton وSpace Grotesk (SIL OFL) — مستضافة محلياً.
