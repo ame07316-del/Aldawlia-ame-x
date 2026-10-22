@@ -6,7 +6,13 @@
 
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
-  var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var mqReduce = typeof window.matchMedia === "function"
+    ? window.matchMedia("(prefers-reduced-motion: reduce)")
+    : null;
+  var prefersReduced = !!(mqReduce && mqReduce.matches);
+  var canHover = function () {
+    return typeof window.matchMedia === "function" && window.matchMedia("(hover: hover)").matches;
+  };
 
   /* Safety net: never leave the page hidden if something breaks. */
   window.setTimeout(function () {
@@ -90,8 +96,8 @@
     --------------------------------------------------- */
     var bar = $("#progressBar");
     var header = $("#siteHeader");
-    var heroWatermark = $(".hero-watermark");
-    var heroVisual = $(".hero-visual");
+    var heroWatermark = null;
+    var heroVisual = null;
     var ticking = false;
 
     function onScroll() {
@@ -208,7 +214,7 @@
        7. Tilt
     --------------------------------------------------- */
     var tilt = $("[data-tilt]");
-    if (tilt && !prefersReduced && window.matchMedia("(hover: hover)").matches) {
+    if (tilt && !prefersReduced && canHover()) {
       var parent = tilt.parentElement;
       parent.addEventListener("mousemove", function (e) {
         var r = parent.getBoundingClientRect();
@@ -224,7 +230,7 @@
     /* ---------------------------------------------------
        8. Magnetic buttons
     --------------------------------------------------- */
-    if (!prefersReduced && window.matchMedia("(hover: hover)").matches) {
+    if (!prefersReduced && canHover()) {
       $$(".magnetic").forEach(function (btn) {
         var strength = parseFloat(btn.getAttribute("data-strength") || "16");
         btn.addEventListener("mousemove", function (e) {
@@ -247,10 +253,10 @@
         btn.addEventListener("click", function () {
           $$(".chip", filters).forEach(function (b) {
             b.classList.remove("is-active");
-            b.setAttribute("aria-selected", "false");
+            b.setAttribute("aria-pressed", "false");
           });
           btn.classList.add("is-active");
-          btn.setAttribute("aria-selected", "true");
+          btn.setAttribute("aria-pressed", "true");
           var f = btn.getAttribute("data-filter");
           workCards.forEach(function (card) {
             var match = f === "all" || card.getAttribute("data-cat") === f;
@@ -304,7 +310,11 @@
       function maxIndex() { return Math.max(0, slides.length - perView()); }
       function slideWidth() {
         if (!slides.length) return 0;
-        return slides[0].getBoundingClientRect().width + 20;
+        if (slides.length < 2) return slides[0].getBoundingClientRect().width;
+        /* Distance between two slides — works in RTL where the track flows left. */
+        return Math.abs(
+          slides[1].getBoundingClientRect().left - slides[0].getBoundingClientRect().left
+        );
       }
       function render() {
         var pv = perView();
@@ -336,15 +346,41 @@
       function start() {
         if (prefersReduced) return;
         stop();
-        autoplay = window.setInterval(next, 6000);
+        autoplay = window.setInterval(next, 6500);
       }
       function stop() { if (autoplay) { window.clearInterval(autoplay); autoplay = null; } }
       function restart() { stop(); start(); }
 
+      var pauseBtn = $("#sliderPause");
+      var userPaused = false;
+
       $("#nextSlide").addEventListener("click", function () { next(); restart(); });
       $("#prevSlide").addEventListener("click", function () { prev(); restart(); });
       sliderEl.addEventListener("mouseenter", stop);
-      sliderEl.addEventListener("mouseleave", start);
+      sliderEl.addEventListener("mouseleave", function () { if (!userPaused) start(); });
+      sliderEl.addEventListener("focusin", stop);
+      sliderEl.addEventListener("focusout", function () { if (!userPaused) start(); });
+
+      if (pauseBtn) {
+        pauseBtn.addEventListener("click", function () {
+          userPaused = !userPaused;
+          pauseBtn.setAttribute("aria-pressed", userPaused ? "true" : "false");
+          pauseBtn.setAttribute("aria-label", userPaused ? "تشغيل العرض التلقائي" : "إيقاف التشغيل التلقائي");
+          if (userPaused) stop(); else start();
+        });
+      }
+
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          if (entries[0] && entries[0].isIntersecting) {
+            if (!userPaused) start();
+          } else stop();
+        }, { threshold: 0.15 }).observe(sliderEl);
+      }
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) stop();
+        else if (!userPaused) start();
+      });
 
       /* touch / drag */
       var startX = null, startY = null, dragging = false;
@@ -416,7 +452,7 @@
         if (!nameIn.value.trim() || nameIn.value.trim().length < 2) { setError(nameIn, "اكتب اسمك الكامل من فضلك."); ok = false; }
         if (!emailRe.test(emailIn.value.trim())) { setError(emailIn, "الإيميل مش صحيح — جرّب تاني."); ok = false; }
         if (msgIn.value.trim().length < 10) { setError(msgIn, "اكتب سطرين على الأقل عن فكرتك."); ok = false; }
-        if (!ok) { showToast("فيه بيانات ناقصة ✦ راجع الحقول المعلّمة."); return; }
+        if (!ok) { showToast("فيه بيانات ناقصة — راجع الحقول المعلّمة."); return; }
 
         var btn = $("button[type='submit']", form);
         var label = $("span", btn);
@@ -442,7 +478,7 @@
           label.textContent = original;
           btn.disabled = false;
           form.reset();
-          showToast("وصلنا بريفك ✦ هنرد عليك في أقل من ٢٤ ساعة.");
+          showToast("وصلنا بريفك. هنرد عليك في أقل من 24 ساعة.");
         }, 950);
       });
     }
@@ -454,11 +490,11 @@
         var input = $("input", newsForm);
         var msg = $("#newsMsg");
         if (!emailRe.test(input.value.trim())) {
-          if (msg) { msg.textContent = "اكتب إيميل صحيح."; msg.style.color = "var(--accent-2)"; }
+          if (msg) { msg.textContent = "اكتب إيميل صحيح."; msg.style.color = "var(--magenta)"; }
           input.focus();
           return;
         }
-        if (msg) { msg.textContent = "تم ✦ أول رسالة هتوصلك أول الشهر."; msg.style.color = "var(--accent)"; }
+        if (msg) { msg.textContent = "تم. أول رسالة هتوصلك أول الشهر."; msg.style.color = "var(--lime)"; }
         input.value = "";
       });
     }
@@ -476,7 +512,7 @@
         var nextTheme = root.getAttribute("data-theme") === "light" ? "dark" : "light";
         root.setAttribute("data-theme", nextTheme);
         try { window.localStorage.setItem("amk_theme", nextTheme); } catch (err) {}
-        showToast(nextTheme === "light" ? "الوضع النهاري ☀" : "الوضع الليلي ☾");
+        showToast(nextTheme === "light" ? "الوضع النهاري" : "الوضع الليلي");
       });
     }
 
