@@ -1066,6 +1066,238 @@ html[data-theme="light"] .work-link:hover .work-info h3 { color: var(--magenta);
 .work-foot p { color: var(--muted); }
 .work-foot strong { color: var(--text); }
 
+/* =========================================================================
+   Works wheel — a real 3D ring of cards.
+   Preserves 3D, rotates the ring on one axis, and counter-rotates each card
+   so every face stays readable while it travels around the circle.
+   ========================================================================= */
+.wheel-block {
+  margin-top: clamp(56px, 7vw, 96px);
+  padding-top: clamp(34px, 4vw, 52px);
+  border-top: 1px solid var(--line);
+}
+.wheel-block-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.72fr);
+  gap: clamp(20px, 3vw, 48px);
+  align-items: end;
+  margin-bottom: clamp(26px, 3.5vw, 42px);
+}
+.wheel-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--lime);
+  margin-bottom: 14px;
+}
+html[data-theme="light"] .wheel-label { color: var(--magenta); }
+.wheel-h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.7rem, 3.2vw, 2.9rem);
+  line-height: 1.16;
+}
+.wheel-head-right { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+.wheel-sub { color: var(--muted); font-size: 0.94rem; max-width: 40ch; }
+.wheel-actions { display: flex; gap: 6px; }
+
+.wheel {
+  position: relative;
+  height: clamp(420px, 58vh, 600px);
+  perspective: 1500px;
+  perspective-origin: 50% 44%;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.wheel.is-dragging { cursor: grabbing; }
+
+.wheel-stage {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(-16deg);
+}
+
+/* Faint floor grid — reads as a stage, gives the ring something to sit on. */
+.wheel-stage::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  width: min(860px, 92%);
+  height: min(860px, 92%);
+  transform: translate(-50%, -50%) rotateX(84deg);
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 62px 62px;
+  mask-image: radial-gradient(closest-side, #000 8%, transparent 72%);
+  -webkit-mask-image: radial-gradient(closest-side, #000 8%, transparent 72%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.wheel-ring {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.9s var(--ease);
+}
+.wheel.is-dragging .wheel-ring { transition: none; }
+.motion-off .wheel-ring { transition: none; }
+.motion-off .w-card { transition: none; }
+
+/* ---- card ---- */
+.w-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(200px, 20vw, 264px);
+  aspect-ratio: 4 / 5;
+  margin: calc(clamp(200px, 20vw, 264px) / 4.2) 0 0 calc(clamp(200px, 20vw, 264px) / -2);
+  transform-style: preserve-3d;
+  border: 1px solid var(--line-2);
+  background: var(--ink-3);
+  overflow: hidden;
+  box-shadow: 0 30px 60px -40px rgba(0, 0, 0, 1);
+  transition: border-color 0.35s, box-shadow 0.35s;
+  backface-visibility: hidden;
+}
+.w-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.05);
+  transition: filter 0.4s, transform 0.6s var(--ease);
+  pointer-events: none;
+}
+.w-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5, 5, 8, 0.96) 0%, rgba(5, 5, 8, 0.35) 42%, rgba(5, 5, 8, 0.1) 100%);
+}
+.w-card-body {
+  position: absolute;
+  inset-inline: 14px;
+  bottom: 14px;
+  z-index: 2;
+  color: #f2f1ea;
+}
+.w-card-body b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.w-card-body span {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  color: rgba(242, 241, 234, 0.6);
+}
+.w-card:not(.is-front) img { filter: saturate(0.45) brightness(0.62) contrast(1.02); }
+.w-card.is-front {
+  border-color: var(--lime);
+  box-shadow: 0 40px 90px -40px rgba(215, 255, 46, 0.45), 0 0 0 1px var(--lime) inset;
+}
+.w-card.is-front img { filter: saturate(1.08) contrast(1.05); }
+.w-card.is-front .w-card-body b { color: var(--lime); }
+
+/* ---- HUD / caption ---- */
+.wheel-hud {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  pointer-events: none;
+}
+.wheel-hud b { color: var(--lime); font-size: 13px; }
+
+.wheel-caption {
+  position: absolute;
+  inset-inline-end: 0;
+  bottom: 8px;
+  text-align: end;
+  pointer-events: none;
+}
+.wheel-cat {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--on-lime);
+  background: var(--lime);
+  padding: 3px 9px;
+  margin-bottom: 8px;
+}
+.wheel-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0;
+}
+.wheel-year {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.wheel-cap-anim { animation: capIn 0.45s var(--ease); }
+@keyframes capIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.wheel-hint {
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 10px;
+  font-size: 0.76rem;
+  color: var(--muted);
+  pointer-events: none;
+}
+.wheel-fallback {
+  display: grid;
+  gap: 10px;
+  margin-top: 30px;
+  color: var(--muted);
+}
+.wheel-fallback li::before { content: "/ "; color: var(--lime); }
+
+@media (max-width: 1180px) {
+  .wheel-block-head { grid-template-columns: 1fr; align-items: start; gap: 18px; }
+}
+@media (max-width: 900px) {
+  .wheel { height: 420px; perspective: 1100px; }
+  .wheel-caption { position: static; text-align: start; margin-top: 18px; }
+  .wheel-hint { display: none; }
+  .wheel-hud { position: static; margin-bottom: 10px; }
+}
+@media (max-width: 620px) {
+  .wheel { height: 400px; perspective: 1250px; }
+  .w-card { width: clamp(184px, 56vw, 230px); margin: calc(clamp(184px, 56vw, 230px) / 4.2) 0 0 calc(clamp(184px, 56vw, 230px) / -2); }
+  .wheel-caption { margin-top: 22px; }
+  .wheel-title { font-size: 1.5rem; }
+}
+
 /* ---------- Accordions ---------- */
 .accordion { border-top: 1px solid var(--line); }
 .acc-item { border-bottom: 1px solid var(--line); transition: background 0.25s; }
