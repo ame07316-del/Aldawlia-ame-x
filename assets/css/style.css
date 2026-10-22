@@ -183,6 +183,7 @@ ul, ol { list-style: none; }
   color: var(--accent);
   position: relative;
   display: inline-block;
+  isolation: isolate;
 }
 .mark::after {
   content: "";
@@ -336,6 +337,7 @@ ul, ol { list-style: none; }
 }
 .site-header.is-stuck {
   height: 68px;
+  background: var(--bg);
   background: color-mix(in srgb, var(--bg) 78%, transparent);
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
@@ -359,9 +361,10 @@ ul, ol { list-style: none; }
   flex-shrink: 0;
 }
 .brand-mark { width: 30px; height: 30px; }
-.brand-mark svg { width: 100%; height: 100%; fill: var(--text); transition: fill 0.3s; }
-.brand-mark svg path:first-child { fill: var(--accent); }
-.brand-mark svg path:last-child { fill: var(--accent-2); }
+.brand-mark svg { width: 100%; height: 100%; overflow: visible; }
+.brand-mark svg rect { fill: var(--accent); transition: fill 0.3s; }
+.brand-mark svg path { fill: var(--accent-ink); }
+.brand:hover .brand-mark svg rect { fill: var(--accent-2); }
 .brand-text {
   font-family: var(--font-latin);
   font-size: 1.85rem;
@@ -1641,7 +1644,7 @@ body.preloading .hero-title .word { animation-play-state: paused; }
 .footer-domain {
   font-family: var(--font-latin);
   font-size: clamp(3.6rem, 17vw, 14.5rem);
-  line-height: 0.82;
+  line-height: 1;
   letter-spacing: -0.01em;
   text-align: center;
   color: transparent;
